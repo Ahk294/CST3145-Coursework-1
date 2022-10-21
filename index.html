@@ -13,22 +13,29 @@
 
 <body>
     <div id="app">
-        <div class="card w-25">
+        <h1 class="display-4" v-text="sitename" style="text-align: center;"></h1>
+        <div class="card m-5" style="width: 20%;">
             <div class="card-header">
                 <header>
-                    <h2 v-text="sitename"></h2>
+                    <h5 class="card-title">Subject: {{lesson.subject}}</h5>
                 </header>
             </div>
             <div class="card-body">
                 <main>
-                    <h5 class="card-title">Subject: {{lesson.subject}}</h5>
                     <p class="card-text">Location: {{lesson.location}}</p>
                     <p class="card-text">Price: AED {{lesson.price}}</p>
-                    <p class="card-text">Spaces: {{lesson.spaces}}</p>
+                    <p class="card-text">Spaces: {{lesson.displaySpaces}}</p>
 
-                    <button v-on:click="addToCart" id="btn_add" class="btn btn-primary">
-                        Add to Cart
-                    </button>
+                    <div class="d-flex">
+                        <button v-on:click="addToCart" v-if="canAddToCart" id="btn_add" class="btn btn-primary ms-auto">
+                            Add to Cart
+                        </button>
+
+                        <button disabled="disabled" v-else class="btn btn-primary ms-auto">
+                            Add to Cart
+                        </button>
+                    </div>
+
                 </main>
             </div>
         </div>
@@ -45,17 +52,19 @@
                     location: "Dubai, UAE",
                     price: 2000,
                     spaces: 5,
+                    displaySpaces: 5,
                 },
                 cart: [],
             },
             methods: {
                 addToCart: function () {
-                    if (this.lesson.spaces != 0) {
-                        this.cart.push(this.lesson.id);
-                        this.lesson.spaces--;
-                    } else {
-                        document.getElementById("btn_add").disabled = true;
-                    }
+                    this.lesson.displaySpaces--;
+                    this.cart.push(this.lesson.id);
+                }
+            },
+            computed: {
+                canAddToCart() {
+                    return this.lesson.spaces > this.cart.length;
                 }
             }
         })
