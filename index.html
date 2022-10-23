@@ -56,8 +56,10 @@
       // Create a Vue instance with some options
       let app = new Vue({
         el: "#app",
+        // Initial data has been declared as a function
         data: {
           sitename: "After School Activities",
+          // Creating lesson object
           lesson: {
             id: 1001,
             subject: "Arduino",
@@ -66,6 +68,7 @@
             spaces: 5,
             displaySpaces: 5,
           },
+          // Creating cart object with empty array
           cart: [],
         },
         methods: {
@@ -85,7 +88,7 @@
       });
     </script>
 
-    // Bootstrap JS
+    <!-- Bootstrap code -->
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
       integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
